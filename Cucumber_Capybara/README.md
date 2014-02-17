@@ -17,8 +17,11 @@ This will install the following `gems`:
 Layout
 ======
 `.` - Root directory. Where you will find this README and the Gemfile.
+
 `./features` - Location of [Gherkins](https://github.com/cucumber/cucumber/wiki/Gherkin) syntax .feature files.
+
 `./features/step_definitions` - This is where the definitions for each step belong
+
 `./features/support` - Helper functions and setting up driver enviroments/configurations
 
 Usage
