@@ -12,4 +12,11 @@ Test Problem
   * utme does NOT contain: “moms”
   * utmac equals:  “UA-10597003-4”
 
+Implementation
+===============
+
+I have solve the above problem in two way. My first method is js file that uses PhantomJs/CasperJs. The second implementation is using Ruby/Cucumber/Capybara/Poltergeist. Since I had some extra time, I thought I would try out Ruby and a Gerkins implementation of the above test.
+
+You will find a README.md in each of the folders exmplaining the example.
+
 
