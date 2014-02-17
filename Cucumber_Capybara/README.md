@@ -34,3 +34,45 @@ or more specific
 ```no-highlight
 $ cucumber features/wetpaint.feature
 ```
+
+If all goes to plan you should see the following in `stdout`:
+
+```no-light
+Feature: Google Analytic GET response
+  In order to verify Google Analytics is getting proper params
+  As a user
+  I want to see what is in the __utm.gif
+
+  Background:                                                                            # features/wetpaint.feature:6
+    Given I am on "http://www.wetpaint.com/moms/video/virtual-puppy-room-corgi-stampede" # features/step_definitions/wetpaint_steps.rb:8
+      {"status"=>"success"}
+
+  Scenario: Verify google analytic request                                               # features/wetpaint.feature:9
+    When I recieve a Google Analytics request                                            # features/step_definitions/wetpaint_steps.rb:12
+    Then I should see the following parameter value pair:                                # features/step_definitions/wetpaint_steps.rb:22
+      [{"param"=>"utme", "value"=>"moms_video"}, {"param"=>"utme", "value"=>"Direct"}, {"param"=>"utmac", "value"=>"UA-10597003-4"}]
+      | param | value         |
+      | utme  | moms_video    |
+      | utme  | Direct        |
+      | utmac | UA-10597003-4 |
+    And parameter "utmp" exists                                                          # features/step_definitions/wetpaint_steps.rb:34
+
+  Scenario: Click Author link and google analytic request                                # features/wetpaint.feature:18
+    Then I click author "Daynah Burnett"                                                 # features/step_definitions/wetpaint_steps.rb:38
+      {"status"=>"success"}
+    When I recieve a Google Analytics request                                            # features/step_definitions/wetpaint_steps.rb:12
+    Then I should see the following parameter value pair:                                # features/step_definitions/wetpaint_steps.rb:22
+      [{"param"=>"utme", "value"=>"none_publishable_rollup"}, {"param"=>"utme", "value"=>"Direct"}, {"param"=>"utmac", "value"=>"UA-10597003-4"}]
+      | param | value                   |
+      | utme  | none_publishable_rollup |
+      | utme  | Direct                  |
+      | utmac | UA-10597003-4           |
+    And I should not see the following parameter value pair:                             # features/step_definitions/wetpaint_steps.rb:22
+      [{"param"=>"utme", "value"=>"moms"}]
+      | param | value |
+      | utme  | moms  |
+
+2 scenarios (2 passed)
+9 steps (9 passed)
+0m25.437s
+```
